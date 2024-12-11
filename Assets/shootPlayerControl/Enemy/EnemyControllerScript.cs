@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyControllerScript : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class EnemyControllerScript : MonoBehaviour
 
             enemyAnimator.SetInteger("EnemyAni", 2); 
             Debug.Log("Attacking the player!");
+            Invoke("playerDie", 2f);
+
         }
         else if (distanceToPlayer <= followDistance)
         {
@@ -65,4 +68,10 @@ public class EnemyControllerScript : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
     }
+
+    void playerDie()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }
